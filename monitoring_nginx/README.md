@@ -8,8 +8,8 @@
 # 安装
 Zabbix安装在 `/etc/zabbix/` 目录下
 
-## Nginx HttpStubStatusModule
-Nginx需要使用`HttpStubStatusModule`构建，即编译时加入选项`--with-http_stub_status_module`。您可以使用nginx -V来检查当前的二进制文件是否包含此模块。
+## Nginx HttpStubStatusModule 支持
+Nginx需要使用`HttpStubStatusModule`构建，即编译时加入选项`--with-http_stub_status_module`。您可以使用`nginx -V`来检查当前的二进制文件是否包含此模块。
 
 ## 添加配置
 - [nginx.conf]()
@@ -32,19 +32,19 @@ server {
 ## 安装脚本znginx.sh 
 - [znginx.sh]()
 
-创建目录 /etc/zabbix/scripts 并将 znginx.sh 脚本复制到该目录下。
+创建目录 `/etc/zabbix/scripts` 并将 `znginx.sh` 脚本复制到该目录下。
 赋予脚本执行权限。
 
 ## 添加User Parameter
 - [userparameter_nginx.conf]()
 
-将 userparameter_nginx.conf 复制到 /etc/zabbix/zabbix_agentd.d 目录下。
+将 `userparameter_nginx.conf` 复制到 `/etc/zabbix/zabbix_agentd.d` 目录下。
 重新启动`zabbix-agent`服务。
 
 ## 导入模板
 - [template_nginx.xml]()
 
-在 Zabbix WEB 管理页面中导入模板文件 template_nginx.xml ,并将其链接到主机。如果需要，请设置主机宏{$ NGINX_STATUS_URL}。
+在 Zabbix WEB 管理页面中导入模板文件 `template_nginx.xml`,并将其链接到主机。如果需要，请设置主机宏`{$ NGINX_STATUS_URL}`。
 
 
 
