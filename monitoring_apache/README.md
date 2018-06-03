@@ -1,13 +1,16 @@
-# 步骤概述：
-- 使apache支持server-status
-- 编写监控脚本
-- 创建监控模板
-- 创建图表
+# Template Nginx
+在 Zabbix 中监控 Apache 状态
 
-# 具体步骤：
-1. 配置apache支持server-status
-- apache配置文件所添加的内容[httpd.conf](https://github.com/kangvcar/zabbix_monitoring_devices/blob/master/monitoring_apache/httpd.conf)
-```
+# 版本
+- Zabbix Server 3.0
+- Zabbix Agent 3.0
+
+# 安装
+Zabbix安装在 `/etc/zabbix/` 目录下
+
+## 配置apache支持server-status
+- [httpd.conf](https://github.com/kangvcar/zabbix_monitoring_devices/blob/master/monitoring_apache/httpd.conf)
+```shell
 ## 在apache主配置文件下加入如下配置
 ExtendedStatus On  
 <location /server-status>  
@@ -16,27 +19,18 @@ ExtendedStatus On
    Allow from 127.0.0.1
 </location>  
 ```
+重新加载 Apache ，并访问`curl http://127.0.0.1/server-status`获取统计信息。
 
-2. 编写监控脚本
-- 监控脚本：[zapache.sh](https://github.com/kangvcar/zabbix_monitoring_devices/blob/master/monitoring_apache/zapache.sh)
-- 把脚本文件zapache放入 /etc/zabbix/scripts/目录下
-- 赋予脚本zapache执行权限
-```
-chmod a+x zapache.sh
-```
+## 安装脚本zapache.sh 
+- [zapache.sh](https://github.com/kangvcar/zabbix_monitoring_devices/blob/master/monitoring_apache/zapache.sh)
+创建目录 /etc/zabbix/scripts 并将 zapache.sh 脚本复制到该目录下。
+赋予脚本执行权限。
 
-3. 修改zabbix-agent配置文件以支持自定义key
-- zabbix-agent配置文件所添加的内容[userparameter_apache.conf](https://github.com/kangvcar/zabbix_monitoring_devices/blob/master/monitoring_apache/userparameter_apache.conf.md)
-```
-vim /etc/zabbix/zabbix_agentd.d/userparameter_apache.conf 
-UserParameter=apache[*],/etc/zabbix/scripts/zapache.sh \$1
-```
+## 添加User Parameter
+- [userparameter_apache.conf](https://github.com/kangvcar/zabbix_monitoring_devices/blob/master/monitoring_apache/userparameter_apache.conf.md)
+将 userparameter_apache.conf 复制到 /etc/zabbix/zabbix_agentd.d 目录下。
+重新启动`zabbix-agent`服务。
 
-4. 在zabbix WEB 中导入apache监控模板，并link到运行apache的主机上
-- 监控模板：[Template_Apache_Stats.xml](https://github.com/kangvcar/zabbix_monitoring_devices/blob/master/monitoring_apache/Template_Apache_Stats.xml)
-
-5. 重启Apache、zabbix-agent
-```
-service httpd restart
-service zabbix-agent restart
-```
+## 导入模板
+- [Template_Apache_Stats.xml](https://github.com/kangvcar/zabbix_monitoring_devices/blob/master/monitoring_apache/Template_Apache_Stats.xml)
+在 Zabbix WEB 管理页面中导入模板文件 Template_Apache_Stats.xml ,并将其链接到主机。
