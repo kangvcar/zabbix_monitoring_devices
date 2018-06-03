@@ -1,0 +1,1 @@
+UserParameter=apache[*],/etc/zabbix/scripts/zapache \$1
