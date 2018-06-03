@@ -29,7 +29,7 @@ ExtendedStatus On
 赋予脚本执行权限。
 
 ## 添加User Parameter
-- [userparameter_apache.conf](https://github.com/kangvcar/zabbix_monitoring_devices/blob/master/monitoring_apache/userparameter_apache.conf.md)
+- [userparameter_apache.conf](https://github.com/kangvcar/zabbix_monitoring_devices/blob/master/monitoring_apache/userparameter_apache.conf)
 
 将 `userparameter_apache.conf` 复制到 `/etc/zabbix/zabbix_agentd.d` 目录下。
 重新启动`zabbix-agent`服务。
