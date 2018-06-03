@@ -13,6 +13,7 @@ Nginx需要使用`HttpStubStatusModule`构建，即编译时加入选项`--with-
 
 ## 添加配置
 - [nginx.conf]()
+
 将以下内容添加到Nginx配置中：
 ```shell
 server {
@@ -30,16 +31,19 @@ server {
 
 ## 安装脚本znginx.sh 
 - [znginx.sh]()
+
 创建目录 /etc/zabbix/scripts 并将 znginx.sh 脚本复制到该目录下。
 赋予脚本执行权限。
 
 ## 添加User Parameter
 - [userparameter_nginx.conf]()
+
 将 userparameter_nginx.conf 复制到 /etc/zabbix/zabbix_agentd.d 目录下。
 重新启动`zabbix-agent`服务。
 
 ## 导入模板
 - [template_nginx.xml]()
+
 在 Zabbix WEB 管理页面中导入模板文件 template_nginx.xml ,并将其链接到主机。如果需要，请设置主机宏{$ NGINX_STATUS_URL}。
 
 
